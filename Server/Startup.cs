@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using BlazorBlogWorkshop.Server.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazorBlogWorkshop.Server
 {
@@ -17,6 +19,9 @@ namespace BlazorBlogWorkshop.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("App")));
+
             services.AddControllersWithViews();
         }
 
